@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- color primary when button not pressed -->
     <item
         android:state_pressed="false">
         <shape android:shape="rectangle" >
@@ -19,6 +20,7 @@
 
         </shape>
     </item>
+    <!-- color accent when button pressed -->
     <item
         android:state_pressed="true">
         <shape android:shape="rectangle" >

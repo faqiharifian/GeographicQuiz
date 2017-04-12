@@ -9,6 +9,7 @@
         <item name="android:typeface">monospace</item>
     </style>
 
+    <!-- Default style for buttons -->
     <style name="default_button">
         <item name="android:background">@drawable/bg_button</item>
         <item name="android:textColor">@android:color/white</item>

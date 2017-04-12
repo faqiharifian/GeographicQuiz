@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.arifian.udacity.whatsitscapitalname.fragment.QuizFragment">
+
+    <ImageView
+        android:id="@+id/province_imageview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/vertical_space"
+        android:layout_marginBottom="@dimen/vertical_space"
+        android:adjustViewBounds="true"
+        android:src="@drawable/indonesia"/>
+    <TextView
+        android:id="@+id/province_name_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="JINR IJGNERJI NGIJRNGIREN G"/>
+
+</LinearLayout>
