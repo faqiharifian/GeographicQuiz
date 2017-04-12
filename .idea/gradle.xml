@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="/mnt/57F7C97B7F7749B8/PROJECT/-Training-/udacity/Nanodegree/AndroidBasics/QuizApp/WhatsItsCapitalName" />
+            <option value="/mnt/57F7C97B7F7749B8/PROJECT/-Training-/udacity/Nanodegree/AndroidBasics/QuizApp/WhatsItsCapitalName/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

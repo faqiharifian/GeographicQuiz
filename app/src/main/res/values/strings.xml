@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">What\'s Its Capital Name</string>
+    <string name="heres_indonesia">Here\'s Indonesia</string>
+    <string name="do_you_know">Do you know capital name of each provinces of it?</string>
+    <string name="of_course">OF COURSE</string>
 </resources>
