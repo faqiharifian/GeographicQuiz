@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.arifian.udacity.whatsitscapitalname.R;
 import com.arifian.udacity.whatsitscapitalname.entities.Province;
+import com.arifian.udacity.whatsitscapitalname.entities.Question;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +26,7 @@ public class QuizFragment extends Fragment {
     public static final String KEY_PROVINCE = "province";
     public static final String KEY_QUESTION = "question";
     Province province;
+    Question question;
 
     public QuizFragment() {
         // Required empty public constructor
@@ -41,7 +43,9 @@ public class QuizFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
         // Get province from argument and set it to text view
-        province = (Province) getArguments().getSerializable(KEY_PROVINCE);
+        question = (Question) getArguments().getSerializable(KEY_QUESTION);
+        province = question.getProvince();
+        String[] options = question.getOptions();
         Drawable drawable;
         if(Build.VERSION.SDK_INT >= 21){
             drawable = getActivity().getDrawable(province.getImage());
@@ -49,30 +53,30 @@ public class QuizFragment extends Fragment {
             drawable = getActivity().getResources().getDrawable(province.getImage());
         }
         String question = "";
-        FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.answer_framelayout);
-        switch (getArguments().getInt(KEY_QUESTION)){
+        FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.options_framelayout);
+        switch (this.question.getType()){
             case 0:{
                 question = getActivity().getString(R.string.question_1);
                 View answerView = inflater.inflate(R.layout.answer_checkbox, frameLayout, true);
-                ((CheckBox) answerView.findViewById(R.id.island_checkbox)).setText(province.getIslandName());
-                ((CheckBox) answerView.findViewById(R.id.province_checkbox)).setText(province.getProvinceName());
-                ((CheckBox) answerView.findViewById(R.id.capital_checkbox)).setText(province.getCapitalName());
+                ((CheckBox) answerView.findViewById(R.id.island_checkbox)).setText(options[0]);
+                ((CheckBox) answerView.findViewById(R.id.province_checkbox)).setText(options[1]);
+                ((CheckBox) answerView.findViewById(R.id.capital_checkbox)).setText(options[2]);
                 break;
             }
             case 1: {
                 question = getActivity().getString(R.string.question_2);
                 View answerView = inflater.inflate(R.layout.answer_radio, frameLayout, true);
-                ((RadioButton) answerView.findViewById(R.id.a_radiobutton)).setText(province.getIslandName());
-                ((RadioButton) answerView.findViewById(R.id.b_radiobutton)).setText(province.getProvinceName());
-                ((RadioButton) answerView.findViewById(R.id.c_radiobutton)).setText(province.getCapitalName());
+                ((RadioButton) answerView.findViewById(R.id.a_radiobutton)).setText(options[0]);
+                ((RadioButton) answerView.findViewById(R.id.b_radiobutton)).setText(options[1]);
+                ((RadioButton) answerView.findViewById(R.id.c_radiobutton)).setText(options[2]);
                 break;
             }
             case 2: {
                 question = getActivity().getString(R.string.question_3);
                 View answerView = inflater.inflate(R.layout.answer_radio, frameLayout, true);
-                ((RadioButton) answerView.findViewById(R.id.a_radiobutton)).setText(province.getIslandName());
-                ((RadioButton) answerView.findViewById(R.id.b_radiobutton)).setText(province.getProvinceName());
-                ((RadioButton) answerView.findViewById(R.id.c_radiobutton)).setText(province.getCapitalName());
+                ((RadioButton) answerView.findViewById(R.id.a_radiobutton)).setText(options[0]);
+                ((RadioButton) answerView.findViewById(R.id.b_radiobutton)).setText(options[1]);
+                ((RadioButton) answerView.findViewById(R.id.c_radiobutton)).setText(options[2]);
                 break;
             }
         }
@@ -81,4 +85,7 @@ public class QuizFragment extends Fragment {
         return view;
     }
 
+    public Question getQuestion(){
+        return question;
+    }
 }

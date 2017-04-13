@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.arifian.udacity.whatsitscapitalname.adapter.QuizFragmentStatePagerAdapter;
 import com.arifian.udacity.whatsitscapitalname.entities.Province;
+import com.arifian.udacity.whatsitscapitalname.fragment.QuizFragment;
 import com.arifian.udacity.whatsitscapitalname.view.ViewPager;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class QuizActivity extends AppCompatActivity {
     ArrayList<Province> provinces;
     ViewPager pager;
+    QuizFragmentStatePagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +61,7 @@ public class QuizActivity extends AppCompatActivity {
         provinces.add(new Province("Papua", "Jayapura", "Papua", R.drawable.papua));
         provinces.add(new Province("West Papua", "Manokwari", "Papua", R.drawable.west_papua));
 
-        QuizFragmentStatePagerAdapter adapter = new QuizFragmentStatePagerAdapter(provinces, getSupportFragmentManager());
+        adapter = new QuizFragmentStatePagerAdapter(provinces, getSupportFragmentManager());
         pager = (ViewPager)findViewById(R.id.pager);
         pager.setAdapter(adapter);
         pager.setPagingEnabled(false);
@@ -67,15 +69,23 @@ public class QuizActivity extends AppCompatActivity {
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
         adapter.registerDataSetObserver(indicator.getDataSetObserver());
+        QuizFragment fragment = (QuizFragment) adapter.getRegisteredFragment(pager.getCurrentItem());
+        fragment.getQuestion();
     }
 
     public void next(View view){
         // Last page
-        if(pager.getCurrentItem() == provinces.size()-1)
+        if(pager.getCurrentItem() == adapter.getCount()-1) {
+            finish();
             return;
+        }
         // Last page -1
-        if(pager.getCurrentItem() == provinces.size()-2)
+        if(pager.getCurrentItem() == adapter.getCount()-2)
             ((Button) findViewById(R.id.next_button)).setText(getString(R.string.finish));
         pager.setCurrentItem(pager.getCurrentItem()+1);
+    }
+
+    public void finish(){
+
     }
 }
