@@ -1,0 +1,46 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.arifian.udacity.geographicquiz.fragment.QuizFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/province_imageview"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/vertical_space"
+            android:layout_marginBottom="@dimen/vertical_space"
+            android:layout_marginLeft="@dimen/vertical_space"
+            android:layout_marginRight="@dimen/vertical_space"
+            android:layout_gravity="center_horizontal"
+            android:adjustViewBounds="true"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/vertical_space"
+            android:layout_marginBottom="@dimen/vertical_space"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/question_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:textSize="18sp"
+                android:gravity="left"/>
+            <FrameLayout
+                android:id="@+id/options_framelayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"></FrameLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

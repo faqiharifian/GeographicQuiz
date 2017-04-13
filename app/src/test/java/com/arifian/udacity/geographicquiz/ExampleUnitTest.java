@@ -1,4 +1,4 @@
-package com.arifian.udacity.whatsitscapitalname;
+package com.arifian.udacity.geographicquiz;
 
 import org.junit.Test;
 

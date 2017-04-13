@@ -1,4 +1,4 @@
-package com.arifian.udacity.whatsitscapitalname.adapter;
+package com.arifian.udacity.geographicquiz.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,15 +7,15 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
-import com.arifian.udacity.whatsitscapitalname.R;
-import com.arifian.udacity.whatsitscapitalname.entities.Province;
-import com.arifian.udacity.whatsitscapitalname.entities.Question;
-import com.arifian.udacity.whatsitscapitalname.fragment.QuizFragment;
+import com.arifian.udacity.geographicquiz.R;
+import com.arifian.udacity.geographicquiz.entities.Province;
+import com.arifian.udacity.geographicquiz.entities.Question;
+import com.arifian.udacity.geographicquiz.fragment.QuizFragment;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import static com.arifian.udacity.whatsitscapitalname.fragment.QuizFragment.KEY_QUESTION;
+import static com.arifian.udacity.geographicquiz.fragment.QuizFragment.KEY_QUESTION;
 
 /**
  * Created by faqih on 13/04/17.

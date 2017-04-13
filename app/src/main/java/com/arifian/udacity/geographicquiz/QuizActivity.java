@@ -1,29 +1,33 @@
-package com.arifian.udacity.whatsitscapitalname;
+package com.arifian.udacity.geographicquiz;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 
-import com.arifian.udacity.whatsitscapitalname.adapter.QuizFragmentStatePagerAdapter;
-import com.arifian.udacity.whatsitscapitalname.entities.Province;
-import com.arifian.udacity.whatsitscapitalname.entities.Question;
-import com.arifian.udacity.whatsitscapitalname.fragment.QuizFragment;
-import com.arifian.udacity.whatsitscapitalname.view.ViewPager;
+import com.arifian.udacity.geographicquiz.adapter.QuizFragmentStatePagerAdapter;
+import com.arifian.udacity.geographicquiz.entities.Province;
+import com.arifian.udacity.geographicquiz.entities.Question;
+import com.arifian.udacity.geographicquiz.fragment.QuizFragment;
+import com.arifian.udacity.geographicquiz.view.ViewPager;
 
 import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
 
 public class QuizActivity extends AppCompatActivity {
+    public static final String KEY_NAME = "name";
     ArrayList<Province> provinces;
     ViewPager pager;
     QuizFragmentStatePagerAdapter adapter;
     Question[] questions;
     String[] answers;
+    String name;
     int score = 0;
 
     @Override
@@ -31,6 +35,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        name = getIntent().getStringExtra(KEY_NAME);
         // Data for quiz (province, capital, island, imageUrl)
         provinces = new ArrayList<>();
         provinces.add(new Province("Aceh", "Banda Aceh", "Sumatera", R.drawable.aceh));
@@ -84,20 +89,43 @@ public class QuizActivity extends AppCompatActivity {
     public void next(View view){
         QuizFragment fragment = (QuizFragment) adapter.getFragment(pager.getCurrentItem());
         questions[pager.getCurrentItem()] = fragment.getQuestion();
-        getAnswer(fragment, fragment.getQuestion());
+        String answer = getAnswer(fragment, fragment.getQuestion());
+        if(answer.equals("false,false,false,")){
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(getString(R.string.alert_title));
+            builder.setMessage(getString(R.string.alert_message_next));
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Last page
+                    if(pager.getCurrentItem() == adapter.getCount()-1) {
+                        getScore();
+                        return;
+                    }
+                    // Last page -1
+                    if(pager.getCurrentItem() == adapter.getCount()-2)
+                        ((Button) findViewById(R.id.next_button)).setText(getString(R.string.finish));
 
-        // Last page
-        if(pager.getCurrentItem() == adapter.getCount()-1) {
-            getScore();
-            return;
+                    pager.setCurrentItem(pager.getCurrentItem()+1);
+                }
+            });
+            builder.show();
+        }else{
+            // Last page
+            if(pager.getCurrentItem() == adapter.getCount()-1) {
+                getScore();
+                return;
+            }
+
+            // Last page -1
+            if(pager.getCurrentItem() == adapter.getCount()-2)
+                ((Button) findViewById(R.id.next_button)).setText(getString(R.string.finish));
+
+            pager.setCurrentItem(pager.getCurrentItem()+1);
         }
-        // Last page -1
-        if(pager.getCurrentItem() == adapter.getCount()-2)
-            ((Button) findViewById(R.id.next_button)).setText(getString(R.string.finish));
-        pager.setCurrentItem(pager.getCurrentItem()+1);
     }
 
-    public void getAnswer(QuizFragment fragment, Question question){
+    public String getAnswer(QuizFragment fragment, Question question){
         String answer = "";
         if(question.getType() == 0){
             answer += ((CheckBox)fragment.getView().findViewById(R.id.island_checkbox)).isChecked()+",";
@@ -109,11 +137,28 @@ public class QuizActivity extends AppCompatActivity {
             answer += ((RadioButton)fragment.getView().findViewById(R.id.c_radiobutton)).isChecked()+",";
         }
         if(answer.equals(question.getAnswer())) ++score;
+        return answer;
     }
 
     public void getScore(){
         Intent intent= new Intent(this, ScoreActivity.class);
+        intent.putExtra(ScoreActivity.KEY_NAME, name);
         intent.putExtra(ScoreActivity.KEY_SCORE, score);
+        finish();
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.alert_title));
+        builder.setMessage(getString(R.string.alert_message_go_back));
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.show();
     }
 }

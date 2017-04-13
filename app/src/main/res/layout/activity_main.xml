@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context="com.arifian.udacity.whatsitscapitalname.MainActivity">
+    tools:context="com.arifian.udacity.geographicquiz.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

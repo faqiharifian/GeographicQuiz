@@ -3,14 +3,17 @@
     <string name="heres_indonesia">Here\'s Indonesia</string>
     <string name="do_you_know">Do you know each provinces of it?</string>
     <string name="of_course">OF COURSE</string>
+    <string name="your_name">What\'s your name?</string>
+    <string name="please_tell_me">Please tell me your name first</string>
     <string name="next">NEXT ></string>
     <string name="finish">FINISH ></string>
-    <string name="question_1">True statement about image above is&#8230;</string>
+    <string name="question_1">True statement about the image is&#8230;</string>
     <string name="question_1_option_1">%1$s island</string>
     <string name="question_1_option_2">Province of %1$s</string>
     <string name="question_1_option_3">The provincial capital is %1$s</string>
-    <string name="question_2">Province name of image above is&#8230;</string>
-    <string name="question_3">Provincial capital of image above is&#8230;</string>
+    <string name="question_2">Province name of image is&#8230;</string>
+    <string name="question_3">Provincial capital of image is&#8230;</string>
+    <string name="hi_name">Hi, %1$s</string>
     <string name="score_is">Your Score Is</string>
     <string name="title_10">Genius!</string>
     <string name="title_7">Good!</string>
@@ -22,4 +25,7 @@
     <string name="message_5">Well done, not bad but not good</string>
     <string name="message_3">You must study harder or you\'ll left behind</string>
     <string name="message_0">Go home kid!</string>
+    <string name="alert_title">Be Careful!</string>
+    <string name="alert_message_go_back">Are you sure? All your progress will be lost</string>
+    <string name="alert_message_next">You haven\'t answer the question. Are you sure want to skip? You can\'t go back anymore.</string>
 </resources>

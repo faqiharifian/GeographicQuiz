@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background"
-    tools:context="com.arifian.udacity.whatsitscapitalname.QuizActivity">
+    tools:context="com.arifian.udacity.geographicquiz.QuizActivity">
 
-    <com.arifian.udacity.whatsitscapitalname.view.ViewPager
+    <com.arifian.udacity.geographicquiz.view.ViewPager
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

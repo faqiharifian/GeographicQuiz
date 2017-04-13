@@ -1,4 +1,4 @@
-package com.arifian.udacity.whatsitscapitalname.view;
+package com.arifian.udacity.geographicquiz.view;
 
 import android.content.Context;
 import android.util.AttributeSet;

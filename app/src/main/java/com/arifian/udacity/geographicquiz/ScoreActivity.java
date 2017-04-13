@@ -1,4 +1,4 @@
-package com.arifian.udacity.whatsitscapitalname;
+package com.arifian.udacity.geographicquiz;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 public class ScoreActivity extends AppCompatActivity {
-    public static String KEY_SCORE = "score";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_SCORE = "score";
     TextView scoreTextView;
 
     @Override
@@ -14,6 +15,7 @@ public class ScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
 
+        String name = getIntent().getStringExtra(KEY_NAME);
         scoreTextView = (TextView)findViewById(R.id.score);
 
         int score = getIntent().getIntExtra(KEY_SCORE, 0);
@@ -42,6 +44,7 @@ public class ScoreActivity extends AppCompatActivity {
         }
 
         scoreTextView.setText(String.valueOf(score));
+        ((TextView) findViewById(R.id.name_textview)).setText(getString(R.string.hi_name, name));
         ((TextView) findViewById(R.id.title)).setText(title);
         ((TextView) findViewById(R.id.short_message)).setText(message);
     }

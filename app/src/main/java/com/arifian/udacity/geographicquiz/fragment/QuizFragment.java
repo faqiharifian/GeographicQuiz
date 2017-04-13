@@ -1,4 +1,4 @@
-package com.arifian.udacity.whatsitscapitalname.fragment;
+package com.arifian.udacity.geographicquiz.fragment;
 
 
 import android.graphics.drawable.Drawable;
@@ -15,9 +15,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.arifian.udacity.whatsitscapitalname.R;
-import com.arifian.udacity.whatsitscapitalname.entities.Province;
-import com.arifian.udacity.whatsitscapitalname.entities.Question;
+import com.arifian.udacity.geographicquiz.R;
+import com.arifian.udacity.geographicquiz.entities.Province;
+import com.arifian.udacity.geographicquiz.entities.Question;
 
 /**
  * A simple {@link Fragment} subclass.

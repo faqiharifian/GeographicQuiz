@@ -1,4 +1,4 @@
-package com.arifian.udacity.whatsitscapitalname.entities;
+package com.arifian.udacity.geographicquiz.entities;
 
 import java.io.Serializable;
 
