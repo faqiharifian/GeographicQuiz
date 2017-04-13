@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///mnt/57F7C97B7F7749B8/PROJECT/-Training-/udacity/Nanodegree/AndroidBasics/QuizApp/WhatsItsCapitalName/WhatsItsCapitalName.iml" filepath="/mnt/57F7C97B7F7749B8/PROJECT/-Training-/udacity/Nanodegree/AndroidBasics/QuizApp/WhatsItsCapitalName/WhatsItsCapitalName.iml" />
-      <module fileurl="file:///mnt/57F7C97B7F7749B8/PROJECT/-Training-/udacity/Nanodegree/AndroidBasics/QuizApp/WhatsItsCapitalName/app/app.iml" filepath="/mnt/57F7C97B7F7749B8/PROJECT/-Training-/udacity/Nanodegree/AndroidBasics/QuizApp/WhatsItsCapitalName/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GeographicQuiz.iml" filepath="$PROJECT_DIR$/GeographicQuiz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../WhatsItsCapitalName/WhatsItsCapitalName.iml" filepath="$PROJECT_DIR$/../WhatsItsCapitalName/WhatsItsCapitalName.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../WhatsItsCapitalName/app/app.iml" filepath="$PROJECT_DIR$/../WhatsItsCapitalName/app/app.iml" />
     </modules>
   </component>
 </project>
