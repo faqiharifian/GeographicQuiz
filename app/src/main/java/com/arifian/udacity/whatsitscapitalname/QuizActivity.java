@@ -1,15 +1,17 @@
 package com.arifian.udacity.whatsitscapitalname;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import com.arifian.udacity.whatsitscapitalname.adapter.QuizFragmentStatePagerAdapter;
 import com.arifian.udacity.whatsitscapitalname.entities.Province;
+import com.arifian.udacity.whatsitscapitalname.view.ViewPager;
 
 import java.util.ArrayList;
+
+import me.relex.circleindicator.CircleIndicator;
 
 public class QuizActivity extends AppCompatActivity {
     ArrayList<Province> provinces;
@@ -57,8 +59,14 @@ public class QuizActivity extends AppCompatActivity {
         provinces.add(new Province("Papua", "Jayapura", "Papua", R.drawable.papua));
         provinces.add(new Province("West Papua", "Manokwari", "Papua", R.drawable.west_papua));
 
+        QuizFragmentStatePagerAdapter adapter = new QuizFragmentStatePagerAdapter(provinces, getSupportFragmentManager());
         pager = (ViewPager)findViewById(R.id.pager);
-        pager.setAdapter(new QuizFragmentStatePagerAdapter(provinces, getSupportFragmentManager()));
+        pager.setAdapter(adapter);
+        pager.setPagingEnabled(false);
+
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
+        adapter.registerDataSetObserver(indicator.getDataSetObserver());
     }
 
     public void next(View view){
@@ -67,7 +75,7 @@ public class QuizActivity extends AppCompatActivity {
             return;
         // Last page -1
         if(pager.getCurrentItem() == provinces.size()-2)
-            ((Button) findViewById(R.id.next_button)).setText("FINISH >");
+            ((Button) findViewById(R.id.next_button)).setText(getString(R.string.finish));
         pager.setCurrentItem(pager.getCurrentItem()+1);
     }
 }
