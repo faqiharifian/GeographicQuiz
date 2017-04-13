@@ -7,9 +7,10 @@ import java.io.Serializable;
  */
 
 public class Province implements Serializable {
-    String provinceName, capitalName, islandName, image;
+    String provinceName, capitalName, islandName;
+    int image;
 
-    public Province(String provinceName, String capitalName, String islandName, String image) {
+    public Province(String provinceName, String capitalName, String islandName, int image) {
         this.provinceName = provinceName;
         this.capitalName = capitalName;
         this.islandName = islandName;
@@ -28,7 +29,7 @@ public class Province implements Serializable {
         return islandName;
     }
 
-    public String getImage() {
+    public int getImage() {
         return image;
     }
 }

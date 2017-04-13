@@ -50,9 +50,11 @@ public class QuizFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Bundle args = new Bundle();
-        args.putSerializable(QuizFragment.KEY, provinces.get(position));
+        args.putSerializable(QuizFragment.KEY_PROVINCE, provinces.get(position));
+        args.putInt(QuizFragment.KEY_QUESTION, position % 3);
         Fragment fragment = new QuizFragment();
         fragment.setArguments(args);
+
         return fragment;
     }
 

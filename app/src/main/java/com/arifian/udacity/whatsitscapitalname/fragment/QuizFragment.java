@@ -1,12 +1,18 @@
 package com.arifian.udacity.whatsitscapitalname.fragment;
 
 
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.arifian.udacity.whatsitscapitalname.R;
@@ -16,7 +22,8 @@ import com.arifian.udacity.whatsitscapitalname.entities.Province;
  * A simple {@link Fragment} subclass.
  */
 public class QuizFragment extends Fragment {
-    public static final String KEY = "province";
+    public static final String KEY_PROVINCE = "province";
+    public static final String KEY_QUESTION = "question";
     Province province;
 
     public QuizFragment() {
@@ -32,10 +39,45 @@ public class QuizFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Get province from argument and set it to text view
-        province = (Province) getArguments().getSerializable(KEY);
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
-        ((TextView)view.findViewById(R.id.province_name_textview)).setText(province.getProvinceName());
+        // Get province from argument and set it to text view
+        province = (Province) getArguments().getSerializable(KEY_PROVINCE);
+        Drawable drawable;
+        if(Build.VERSION.SDK_INT >= 21){
+            drawable = getActivity().getDrawable(province.getImage());
+        }else{
+            drawable = getActivity().getResources().getDrawable(province.getImage());
+        }
+        String question = "";
+        FrameLayout frameLayout = (FrameLayout) view.findViewById(R.id.answer_framelayout);
+        switch (getArguments().getInt(KEY_QUESTION)){
+            case 0:{
+                question = getActivity().getString(R.string.question_1);
+                View answerView = inflater.inflate(R.layout.answer_checkbox, frameLayout, true);
+                ((CheckBox) answerView.findViewById(R.id.island_checkbox)).setText(province.getIslandName());
+                ((CheckBox) answerView.findViewById(R.id.province_checkbox)).setText(province.getProvinceName());
+                ((CheckBox) answerView.findViewById(R.id.capital_checkbox)).setText(province.getCapitalName());
+                break;
+            }
+            case 1: {
+                question = getActivity().getString(R.string.question_2);
+                View answerView = inflater.inflate(R.layout.answer_radio, frameLayout, true);
+                ((RadioButton) answerView.findViewById(R.id.a_radiobutton)).setText(province.getIslandName());
+                ((RadioButton) answerView.findViewById(R.id.b_radiobutton)).setText(province.getProvinceName());
+                ((RadioButton) answerView.findViewById(R.id.c_radiobutton)).setText(province.getCapitalName());
+                break;
+            }
+            case 2: {
+                question = getActivity().getString(R.string.question_3);
+                View answerView = inflater.inflate(R.layout.answer_radio, frameLayout, true);
+                ((RadioButton) answerView.findViewById(R.id.a_radiobutton)).setText(province.getIslandName());
+                ((RadioButton) answerView.findViewById(R.id.b_radiobutton)).setText(province.getProvinceName());
+                ((RadioButton) answerView.findViewById(R.id.c_radiobutton)).setText(province.getCapitalName());
+                break;
+            }
+        }
+        ((TextView)view.findViewById(R.id.question_textview)).setText(question);
+        ((ImageView) view.findViewById(R.id.province_imageview)).setImageDrawable(drawable);
         return view;
     }
 
