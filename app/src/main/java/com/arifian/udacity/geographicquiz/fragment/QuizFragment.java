@@ -77,6 +77,11 @@ public class QuizFragment extends Fragment {
                 ((RadioButton) answerView.findViewById(R.id.c_radiobutton)).setText(options[2]);
                 break;
             }
+            case 3: {
+                question = getString(R.string.question_4);
+                View answerView = inflater.inflate(R.layout.answer_text, frameLayout, true);
+                answerView.setFocusable(true);
+            }
         }
         ((TextView)view.findViewById(R.id.question_textview)).setText(question);
         ((ImageView) view.findViewById(R.id.province_imageview)).setImageDrawable(drawable);

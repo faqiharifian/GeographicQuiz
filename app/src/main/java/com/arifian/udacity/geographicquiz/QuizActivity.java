@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.arifian.udacity.geographicquiz.adapter.QuizFragmentStatePagerAdapter;
 import com.arifian.udacity.geographicquiz.entities.Province;
@@ -21,11 +22,9 @@ import java.util.ArrayList;
 import me.relex.circleindicator.CircleIndicator;
 
 public class QuizActivity extends AppCompatActivity {
-    public static final String KEY_NAME = "name";
     ArrayList<Province> provinces;
     ViewPager pager;
     QuizFragmentStatePagerAdapter adapter;
-    String name;
     int score = 0;
 
     @Override
@@ -33,7 +32,6 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        name = getIntent().getStringExtra(KEY_NAME);
         // Data for quiz (province, capital, island, imageUrl)
         provinces = new ArrayList<>();
         provinces.add(new Province("Aceh", "Banda Aceh", "Sumatera", R.drawable.aceh));
@@ -84,7 +82,7 @@ public class QuizActivity extends AppCompatActivity {
     public void next(View view){
         QuizFragment fragment = (QuizFragment) adapter.getFragment(pager.getCurrentItem());
         String answer = getAnswer(fragment, fragment.getQuestion());
-        if(answer.equals("false,false,false,")){
+        if(answer.equals("false,false,false,") || answer.equals("")){
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle(getString(R.string.alert_title));
             builder.setMessage(getString(R.string.alert_message_next));
@@ -119,18 +117,19 @@ public class QuizActivity extends AppCompatActivity {
             answer += ((CheckBox)fragment.getView().findViewById(R.id.island_checkbox)).isChecked()+",";
             answer += ((CheckBox)fragment.getView().findViewById(R.id.province_checkbox)).isChecked()+",";
             answer += ((CheckBox)fragment.getView().findViewById(R.id.capital_checkbox)).isChecked()+",";
+        }else if(question.getType() == 3){
+            answer = ((TextView)fragment.getView().findViewById(R.id.answer_edittext)).getText().toString();
         }else{
             answer += ((RadioButton)fragment.getView().findViewById(R.id.a_radiobutton)).isChecked()+",";
             answer += ((RadioButton)fragment.getView().findViewById(R.id.b_radiobutton)).isChecked()+",";
             answer += ((RadioButton)fragment.getView().findViewById(R.id.c_radiobutton)).isChecked()+",";
         }
-        if(answer.equals(question.getAnswer())) ++score;
+        if(answer.equalsIgnoreCase(question.getAnswer())) ++score;
         return answer;
     }
 
     public void getScore(){
         Intent intent= new Intent(this, ScoreActivity.class);
-        intent.putExtra(ScoreActivity.KEY_NAME, name);
         intent.putExtra(ScoreActivity.KEY_SCORE, score);
         finish();
         startActivity(intent);

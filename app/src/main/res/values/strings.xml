@@ -13,6 +13,7 @@
     <string name="question_1_option_3">The provincial capital is %1$s</string>
     <string name="question_2">Province name of image is&#8230;</string>
     <string name="question_3">Provincial capital of image is&#8230;</string>
+    <string name="question_4">Island name of image is&#8230;</string>
     <string name="hi_name">Hi, %1$s</string>
     <string name="score_is">Your Score Is</string>
     <string name="title_10">Genius!</string>

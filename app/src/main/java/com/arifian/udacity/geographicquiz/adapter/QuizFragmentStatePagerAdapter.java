@@ -66,7 +66,7 @@ public class QuizFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
             Province province = provinces.get(indexProvince);
 
             // Generate type of question
-            int type = randomGenerator.nextInt(3);
+            int type = randomGenerator.nextInt(4);
             String[] options = new String[3];
             boolean[] answers = new boolean[3];
 
@@ -131,8 +131,12 @@ public class QuizFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
             // answers converted to string with "," as delimeter
             String answer = "";
-            for(int j = 0; j < answers.length; j++){
-                answer += answers[j] + ",";
+            if(type == 3){
+                answer = province.getIslandName();
+            }else {
+                for (int j = 0; j < answers.length; j++) {
+                    answer += answers[j] + ",";
+                }
             }
             Log.e("answer", i+" - "+answer);
             questions[i] = new Question(type, answer, options, province);
