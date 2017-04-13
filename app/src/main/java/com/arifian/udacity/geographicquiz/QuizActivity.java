@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arifian.udacity.geographicquiz.adapter.QuizFragmentStatePagerAdapter;
 import com.arifian.udacity.geographicquiz.entities.Province;
@@ -129,6 +130,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     public void getScore(){
+        Toast.makeText(this, "You answer "+score+" correctly out of 10.", Toast.LENGTH_LONG).show();
         Intent intent= new Intent(this, ScoreActivity.class);
         intent.putExtra(ScoreActivity.KEY_SCORE, score);
         finish();
