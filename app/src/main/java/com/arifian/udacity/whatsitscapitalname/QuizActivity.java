@@ -1,12 +1,16 @@
 package com.arifian.udacity.whatsitscapitalname;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 
 import com.arifian.udacity.whatsitscapitalname.adapter.QuizFragmentStatePagerAdapter;
 import com.arifian.udacity.whatsitscapitalname.entities.Province;
+import com.arifian.udacity.whatsitscapitalname.entities.Question;
 import com.arifian.udacity.whatsitscapitalname.fragment.QuizFragment;
 import com.arifian.udacity.whatsitscapitalname.view.ViewPager;
 
@@ -18,6 +22,9 @@ public class QuizActivity extends AppCompatActivity {
     ArrayList<Province> provinces;
     ViewPager pager;
     QuizFragmentStatePagerAdapter adapter;
+    Question[] questions;
+    String[] answers;
+    int score = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,32 +43,32 @@ public class QuizActivity extends AppCompatActivity {
         provinces.add(new Province("Bengkulu", "Bengkulu", "Sumatera", R.drawable.bengkulu));
         provinces.add(new Province("Bangka Belitung Islands", "Pangkalpinang", "Sumatera", R.drawable.bangka_belitung));
         provinces.add(new Province("Lampung", "Bandar Lampung", "Sumatera", R.drawable.lampung));
-        provinces.add(new Province("Jakarta", "Jakarta", "Jawa", R.drawable.jakarta));
-        provinces.add(new Province("Banten", "Serang", "Jawa", R.drawable.banten));
-        provinces.add(new Province("West Jawa", "Bandung", "Jawa", R.drawable.west_java));
-        provinces.add(new Province("Central Jawa", "Semarang", "Jawa", R.drawable.central_java));
-        provinces.add(new Province("East Jawa", "Surabaya", "Jawa", R.drawable.east_java));
-        provinces.add(new Province("Yogyakarta", "Yogyakarta", "Jawa", R.drawable.yogyakarta));
-        provinces.add(new Province("North Kalimantan", "Tanjungselor", "Kalimantan", R.drawable.north_kalimantan));
-        provinces.add(new Province("West Kalimantan", "Pontianak", "Kalimantan", R.drawable.west_kalimantan));
-        provinces.add(new Province("South Kalimantan", "Banjarmasin", "Kalimantan", R.drawable.south_kalimantan));
-        provinces.add(new Province("Central Kalimantan", "Palangkaraya", "Kalimantan", R.drawable.central_kalimantan));
-        provinces.add(new Province("East Kalimantan", "Samarinda", "Kalimantan", R.drawable.east_kalimantan));
-        provinces.add(new Province("Gorontalo", "Gorontalo", "Sulawesi", R.drawable.gorontalo));
-        provinces.add(new Province("North Sulawesi", "Manado", "Sulawesi", R.drawable.north_sulawesi));
-        provinces.add(new Province("West Sulawesi", "Mamuju", "Sulawesi", R.drawable.west_sulawesi));
-        provinces.add(new Province("South Sulawesi", "Makassar", "Sulawesi", R.drawable.south_sulawesi));
-        provinces.add(new Province("Central Sulawesi", "Palu", "Sulawesi", R.drawable.central_sulawesi));
-        provinces.add(new Province("Southeast Sulawesi", "Kendari", "Sulawesi", R.drawable.southeast_sulawesi));
-        provinces.add(new Province("Bali", "Denpasar", "Nusa Tenggara", R.drawable.bali));
-        provinces.add(new Province("West Nusa Tenggara", "Mataram", "Nusa Tenggara", R.drawable.west_nusa_tenggara));
-        provinces.add(new Province("East Nusa Tenggara", "Kupang", "Nusa Tenggara", R.drawable.east_nusa_tenggara));
-        provinces.add(new Province("Maluku", "Ambon", "Maluku", R.drawable.maluku));
-        provinces.add(new Province("North Maluku", "Sofifi", "Maluku", R.drawable.north_maluku));
-        provinces.add(new Province("Papua", "Jayapura", "Papua", R.drawable.papua));
-        provinces.add(new Province("West Papua", "Manokwari", "Papua", R.drawable.west_papua));
+//        provinces.add(new Province("Jakarta", "Jakarta", "Jawa", R.drawable.jakarta));
+//        provinces.add(new Province("Banten", "Serang", "Jawa", R.drawable.banten));
+//        provinces.add(new Province("West Jawa", "Bandung", "Jawa", R.drawable.west_java));
+//        provinces.add(new Province("Central Jawa", "Semarang", "Jawa", R.drawable.central_java));
+//        provinces.add(new Province("East Jawa", "Surabaya", "Jawa", R.drawable.east_java));
+//        provinces.add(new Province("Yogyakarta", "Yogyakarta", "Jawa", R.drawable.yogyakarta));
+//        provinces.add(new Province("North Kalimantan", "Tanjungselor", "Kalimantan", R.drawable.north_kalimantan));
+//        provinces.add(new Province("West Kalimantan", "Pontianak", "Kalimantan", R.drawable.west_kalimantan));
+//        provinces.add(new Province("South Kalimantan", "Banjarmasin", "Kalimantan", R.drawable.south_kalimantan));
+//        provinces.add(new Province("Central Kalimantan", "Palangkaraya", "Kalimantan", R.drawable.central_kalimantan));
+//        provinces.add(new Province("East Kalimantan", "Samarinda", "Kalimantan", R.drawable.east_kalimantan));
+//        provinces.add(new Province("Gorontalo", "Gorontalo", "Sulawesi", R.drawable.gorontalo));
+//        provinces.add(new Province("North Sulawesi", "Manado", "Sulawesi", R.drawable.north_sulawesi));
+//        provinces.add(new Province("West Sulawesi", "Mamuju", "Sulawesi", R.drawable.west_sulawesi));
+//        provinces.add(new Province("South Sulawesi", "Makassar", "Sulawesi", R.drawable.south_sulawesi));
+//        provinces.add(new Province("Central Sulawesi", "Palu", "Sulawesi", R.drawable.central_sulawesi));
+//        provinces.add(new Province("Southeast Sulawesi", "Kendari", "Sulawesi", R.drawable.southeast_sulawesi));
+//        provinces.add(new Province("Bali", "Denpasar", "Nusa Tenggara", R.drawable.bali));
+//        provinces.add(new Province("West Nusa Tenggara", "Mataram", "Nusa Tenggara", R.drawable.west_nusa_tenggara));
+//        provinces.add(new Province("East Nusa Tenggara", "Kupang", "Nusa Tenggara", R.drawable.east_nusa_tenggara));
+//        provinces.add(new Province("Maluku", "Ambon", "Maluku", R.drawable.maluku));
+//        provinces.add(new Province("North Maluku", "Sofifi", "Maluku", R.drawable.north_maluku));
+//        provinces.add(new Province("Papua", "Jayapura", "Papua", R.drawable.papua));
+//        provinces.add(new Province("West Papua", "Manokwari", "Papua", R.drawable.west_papua));
 
-        adapter = new QuizFragmentStatePagerAdapter(provinces, getSupportFragmentManager());
+        adapter = new QuizFragmentStatePagerAdapter(this, provinces, getSupportFragmentManager());
         pager = (ViewPager)findViewById(R.id.pager);
         pager.setAdapter(adapter);
         pager.setPagingEnabled(false);
@@ -69,14 +76,19 @@ public class QuizActivity extends AppCompatActivity {
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
         adapter.registerDataSetObserver(indicator.getDataSetObserver());
-        QuizFragment fragment = (QuizFragment) adapter.getRegisteredFragment(pager.getCurrentItem());
-        fragment.getQuestion();
+
+        questions = new Question[adapter.getCount()];
+        answers = new String[adapter.getCount()];
     }
 
     public void next(View view){
+        QuizFragment fragment = (QuizFragment) adapter.getFragment(pager.getCurrentItem());
+        questions[pager.getCurrentItem()] = fragment.getQuestion();
+        getAnswer(fragment, fragment.getQuestion());
+
         // Last page
         if(pager.getCurrentItem() == adapter.getCount()-1) {
-            finish();
+            getScore();
             return;
         }
         // Last page -1
@@ -85,7 +97,23 @@ public class QuizActivity extends AppCompatActivity {
         pager.setCurrentItem(pager.getCurrentItem()+1);
     }
 
-    public void finish(){
+    public void getAnswer(QuizFragment fragment, Question question){
+        String answer = "";
+        if(question.getType() == 0){
+            answer += ((CheckBox)fragment.getView().findViewById(R.id.island_checkbox)).isChecked()+",";
+            answer += ((CheckBox)fragment.getView().findViewById(R.id.province_checkbox)).isChecked()+",";
+            answer += ((CheckBox)fragment.getView().findViewById(R.id.capital_checkbox)).isChecked()+",";
+        }else{
+            answer += ((RadioButton)fragment.getView().findViewById(R.id.a_radiobutton)).isChecked()+",";
+            answer += ((RadioButton)fragment.getView().findViewById(R.id.b_radiobutton)).isChecked()+",";
+            answer += ((RadioButton)fragment.getView().findViewById(R.id.c_radiobutton)).isChecked()+",";
+        }
+        if(answer.equals(question.getAnswer())) ++score;
+    }
 
+    public void getScore(){
+        Intent intent= new Intent(this, ScoreActivity.class);
+        intent.putExtra(ScoreActivity.KEY_SCORE, String.valueOf(score));
+        startActivity(intent);
     }
 }

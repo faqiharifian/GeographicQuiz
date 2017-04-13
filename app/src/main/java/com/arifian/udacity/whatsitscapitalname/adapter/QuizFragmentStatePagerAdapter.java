@@ -1,13 +1,12 @@
 package com.arifian.udacity.whatsitscapitalname.adapter;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.util.Log;
-import android.util.SparseArray;
-import android.view.ViewGroup;
 
+import com.arifian.udacity.whatsitscapitalname.R;
 import com.arifian.udacity.whatsitscapitalname.entities.Province;
 import com.arifian.udacity.whatsitscapitalname.entities.Question;
 import com.arifian.udacity.whatsitscapitalname.fragment.QuizFragment;
@@ -22,37 +21,24 @@ import static com.arifian.udacity.whatsitscapitalname.fragment.QuizFragment.KEY_
  */
 
 public class QuizFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
-    // Sparse array to keep track of registered fragments in memory
-    private SparseArray<Fragment> registeredFragments = new SparseArray<>();
     ArrayList<Province> provinces;
     Question[] questions;
+    Fragment[] fragments;
+    Context context;
 
-    public QuizFragmentStatePagerAdapter(ArrayList<Province> provinces, FragmentManager fm) {
+    public QuizFragmentStatePagerAdapter(Context context, ArrayList<Province> provinces, FragmentManager fm) {
         super(fm);
+        this.context = context;
         this.provinces = provinces;
         questions = new Question[getCount()];
+        fragments = new Fragment[getCount()];
 
         initiateQuestions();
     }
 
-    // Register the fragment when the item is instantiated
-    @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        registeredFragments.put(position, fragment);
-        return fragment;
-    }
-
-    // Unregister when the item is inactive
-    @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
-        registeredFragments.remove(position);
-        super.destroyItem(container, position, object);
-    }
-
-    // Returns the fragment for the position (if instantiated)
-    public Fragment getRegisteredFragment(int position) {
-        return registeredFragments.get(position);
+    // Returns the fragment for the position
+    public Fragment getFragment(int position) {
+        return fragments[position];
     }
 
     // Initiate fragment and pass province to it
@@ -62,7 +48,7 @@ public class QuizFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
         args.putSerializable(KEY_QUESTION, questions[position]);
         Fragment fragment = new QuizFragment();
         fragment.setArguments(args);
-
+        fragments[position] = fragment;
         return fragment;
     }
 
@@ -77,16 +63,15 @@ public class QuizFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
             int indexProvince = randomGenerator.nextInt(provinces.size());
             Province province = provinces.get(indexProvince);
-            provinces.remove(indexProvince);
 
             // Generate type of question
             int type = randomGenerator.nextInt(3);
             String[] options = new String[3];
-            int[] answers = new int[3];
+            boolean[] answers = new boolean[3];
 
             // Generate true answer
             int indexTrue = randomGenerator.nextInt(3);
-            answers[indexTrue] = 1;
+            answers[indexTrue] = true;
             switch(type){
                 case 0:
                     options = setCheckBoxOption(options, indexTrue, province);
@@ -103,24 +88,41 @@ public class QuizFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
             // for type question 0 the options is 1 answer is 100% true, 1 answer is 70% true and 1 answer is 50% true
             // other type is 100% true an the rest is false
             int trueProbability = 7;
+            int secondIndex = -1;
             for(int j = 0; j < options.length; j++){
                 if(options[j] == null){
+                    answers[j] = false;
+
+                    // Generate unique province to remaining options
+                    Province optionProvince;
+                    int index;
+                    if(secondIndex != -1){
+                        do{
+                            index = (new Random()).nextInt(provinces.size());
+                        }while(index == indexProvince || index == secondIndex);
+                    }else{
+                        do{
+                            index = (new Random()).nextInt(provinces.size());
+                        }while(index == indexProvince);
+                        secondIndex = index;
+                    }
+                    optionProvince = provinces.get(index);
+
                     switch(type){
                         case 0:
                             if(randomGenerator.nextInt(10) < trueProbability){
-                                answers[j] = 1;
+                                answers[j] = true;
                                 options = setCheckBoxOption(options, j, province);
                             }else{
-                                answers[j] = 0;
-                                options = setCheckBoxOption(options, j, getRandomProvince());
+                                options = setCheckBoxOption(options, j, optionProvince);
                             }
                             trueProbability -= 2;
                             break;
                         case 1:
-                            options[j] = getRandomProvince().getProvinceName();
+                            options[j] = optionProvince.getProvinceName();
                             break;
                         case 2:
-                            options[j] = getRandomProvince().getCapitalName();
+                            options[j] = optionProvince.getCapitalName();
                             break;
                     }
                 }
@@ -129,31 +131,22 @@ public class QuizFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
             // answers converted to string with "," as delimeter
             String answer = "";
             for(int j = 0; j < answers.length; j++){
-                answer += answers[j];
-                if(j != answers.length-1){
-                    answer += ",";
-                }
+                answer += answers[j] + ",";
             }
-            Log.e("answer", answer);
             questions[i] = new Question(type, answer, options, province);
         }
-    }
-
-    private Province getRandomProvince(){
-        int index = (new Random()).nextInt(provinces.size());
-        return provinces.get(index);
     }
 
     private String[] setCheckBoxOption(String[] options, int index, Province province){
         switch (index){
             case 0:
-                options[index] = province.getIslandName()+" island.";
+                options[index] = context.getString(R.string.question_1_option_1, province.getIslandName());
                 break;
             case 1:
-                options[index] = "Province of "+province.getProvinceName();
+                options[index] = context.getString(R.string.question_1_option_2, province.getProvinceName());
                 break;
             case 2:
-                options[index] = "The provincial capital is "+province.getCapitalName();
+                options[index] = context.getString(R.string.question_1_option_3, province.getCapitalName());
                 break;
         }
         return options;

@@ -6,6 +6,9 @@
     <string name="next">NEXT ></string>
     <string name="finish">FINISH ></string>
     <string name="question_1">True statement about image above is&#8230;</string>
+    <string name="question_1_option_1">%1$s island</string>
+    <string name="question_1_option_2">Province of %1$s</string>
+    <string name="question_1_option_3">The provincial capital is %1$s</string>
     <string name="question_2">Province name of image above is&#8230;</string>
     <string name="question_3">Provincial capital of image above is&#8230;</string>
 </resources>
