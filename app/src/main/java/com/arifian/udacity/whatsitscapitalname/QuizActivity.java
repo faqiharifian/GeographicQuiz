@@ -113,7 +113,7 @@ public class QuizActivity extends AppCompatActivity {
 
     public void getScore(){
         Intent intent= new Intent(this, ScoreActivity.class);
-        intent.putExtra(ScoreActivity.KEY_SCORE, String.valueOf(score));
+        intent.putExtra(ScoreActivity.KEY_SCORE, score);
         startActivity(intent);
     }
 }

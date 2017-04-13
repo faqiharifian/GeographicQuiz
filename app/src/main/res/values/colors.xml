@@ -4,4 +4,10 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="score_10">#00ff00</color>
+    <color name="score_7">#9ccc65</color>
+    <color name="score_5">#ffea00</color>
+    <color name="score_3">#ff6d00</color>
+    <color name="score_0">#d50000</color>
 </resources>

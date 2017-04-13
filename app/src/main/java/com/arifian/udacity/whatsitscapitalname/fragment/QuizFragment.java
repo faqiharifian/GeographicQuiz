@@ -23,7 +23,6 @@ import com.arifian.udacity.whatsitscapitalname.entities.Question;
  * A simple {@link Fragment} subclass.
  */
 public class QuizFragment extends Fragment {
-    public static final String KEY_PROVINCE = "province";
     public static final String KEY_QUESTION = "question";
     Province province;
     Question question;
@@ -42,7 +41,6 @@ public class QuizFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_quiz, container, false);
-        // Get province from argument and set it to text view
         question = (Question) getArguments().getSerializable(KEY_QUESTION);
         province = question.getProvince();
         String[] options = question.getOptions();

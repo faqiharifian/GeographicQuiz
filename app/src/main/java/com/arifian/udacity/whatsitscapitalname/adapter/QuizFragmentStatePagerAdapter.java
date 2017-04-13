@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.util.Log;
 
 import com.arifian.udacity.whatsitscapitalname.R;
 import com.arifian.udacity.whatsitscapitalname.entities.Province;
@@ -133,6 +134,7 @@ public class QuizFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
             for(int j = 0; j < answers.length; j++){
                 answer += answers[j] + ",";
             }
+            Log.e("answer", i+" - "+answer);
             questions[i] = new Question(type, answer, options, province);
         }
     }
