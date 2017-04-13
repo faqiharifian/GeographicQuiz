@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 public class Question implements Serializable {
     int type;
-    String question, answer;
+    String answer;
     String[] options;
     Province province;
 
@@ -21,10 +21,6 @@ public class Question implements Serializable {
 
     public int getType() {
         return type;
-    }
-
-    public String getQuestion() {
-        return question;
     }
 
     public String getAnswer() {
